@@ -56,3 +56,30 @@ Project in Action - [Jobify](https://www.jobify.live/)
 - if any questions about normalize or specific styles
 - Coding Addict (Default Starter)[https://youtu.be/UDdyGNlQK5w]
 - Repo (Default Starter)[https://github.com/john-smilga/default-starter]
+
+#### Landing Page
+
+- zoom level 175%
+- markdown preview extension
+- get something on the screen
+- react router and styled components right after
+- create pages directory in the source
+- for now Landing.js
+- create component (snippets extension)
+- setup basic return
+
+```js
+<h1>Landing Page</h1>
+```
+
+- import logo.svg and main.svg
+- import Landing in App.js and render
+
+#### Styled Components
+
+- CSS in JS
+- Styled Components
+- have logic and styles in component
+- no name collisions
+- apply javascript logic
+-
