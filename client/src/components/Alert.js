@@ -5,7 +5,7 @@ const Alert = () => {
   const { alertType, alertText } = useAppContext()
   return (
       <div className={`alert alert-${alertType}`}>
-        <p style={{textAlign: "center"}}>{alertText}</p></div>
+        <p style={{textAlign: "center", marginTop: "0px"}}>{alertText}</p></div>
   )
 }
 
