@@ -1,29 +1,37 @@
-import React from 'react';
-import main from '../assets/images/main.svg';
-import Wrapper from '../assets/wrappers/Testing';
-import { Logo } from '../components';
+import React from "react";
+import main from "../assets/images/main.svg";
+import { Link } from "react-router-dom";
+import Wrapper from "../assets/wrappers/Testing";
+import { Logo } from "../components";
 const Landing = () => {
   return (
     <Wrapper>
-        <nav>
-          <Logo />
-        </nav>
-        <div className='container page'>
-            {/* Info */}
-            <div className='info'>
-                <h1>Job <span>Tracking</span> App</h1>
-                <br/>
-                <p>I'm baby pabst butcher 90's skateboard. Sustainable polaroid irony meh cred.
-                     Taiyaki art party leggings aesthetic slow-carb. 
-                     Tote bag ramps bitters, thundercats air plant ascot shoreditch slow-carb raw denim. </p>
-                     <br/>
-                     <button className='btn btn-hero'>Login/Register</button>
-            </div>
-            <img src={main} alt="Job hunt" className='img main-img' />
+      <nav>
+        <Logo />
+      </nav>
+      <div className="container page">
+        {/* Info */}
+        <div className="info">
+          <h1>
+            Job <span>Tracking</span> App
+          </h1>
+          <br />
+          <p>
+            I'm baby pabst butcher 90's skateboard. Sustainable polaroid irony
+            meh cred. Taiyaki art party leggings aesthetic slow-carb. Tote bag
+            ramps bitters, thundercats air plant ascot shoreditch slow-carb raw
+            denim.{" "}
+          </p>
+          <br />
+          <Link to="/register">
+            <button className="btn btn-hero">Login/Register</button>
+          </Link>
         </div>
+        <img src={main} alt="Job hunt" className="img main-img" />
+      </div>
     </Wrapper>
-  )
-}
+  );
+};
 // const Wrapper = styled.main`
 // nav {
 //     width: var(--fluid-width);
@@ -61,4 +69,4 @@ const Landing = () => {
 //     }
 // }
 // `
-export default Landing
+export default Landing;
