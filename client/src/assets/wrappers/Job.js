@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const Wrapper = styled.article`
   background: var(--background-secondary-color);
@@ -75,7 +75,17 @@ const Wrapper = styled.article`
   }
   .edit-btn {
     margin-right: 0.5rem;
+    color: var(--green-dark);
+    background: var(--green-light);
   }
+  .delete-btn {
+    color: var(--red-dark);
+    background: var(--red-light);
+  }
+  &:hover .actions {
+    visibility: visible;
+  }
+
 `;
 
 export default Wrapper;
