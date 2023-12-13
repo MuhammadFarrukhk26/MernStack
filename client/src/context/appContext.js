@@ -3,9 +3,6 @@ import reducer from "./reducer";
 import {
   DISPLAY_ALERT,
   CLEAR_ALERT,
-  // REGISTER_USER_BEGIN,
-  // REGISTER_USER_SUCCESS,
-  // REGISTER_USER_ERROR,
   UPDATE_USER_BEGIN,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
@@ -27,6 +24,8 @@ import {
   EDIT_JOB_BEGIN,
   EDIT_JOB_ERROR,
   EDIT_JOB_SUCCESS,
+  CLEAR_FILTERS,
+  CHANGE_PAGE,
 } from "./action";
 import axios from "axios";
 
@@ -39,7 +38,7 @@ const initialState = {
   showAlert: false,
   alertText: "",
   alertType: "",
-  user: null ? JSON.parse(user) : null,
+  user: JSON.parse(user),
   token: token,
   userLocation: userLocation || "",
   showSidebar: false,
@@ -51,6 +50,11 @@ const initialState = {
   jobTypeOptions: ["full-time", "part-time", "remote", "internship"],
   jobType: "full-time",
   statusOptions: ["interview", "declined", "pending"],
+  search: "",
+  searchStatus: "all",
+  searchType: "all",
+  sort: "latest",
+  sortOptions: ["latest", "oldest", "a-z", "z-a"],
   status: "pending",
   jobs: [],
   totalJobs: 0,
@@ -215,7 +219,12 @@ const AppProvider = ({ children }) => {
   };
 
   const getJobs = async () => {
-    let url = `/jobs`;
+    // let url = `/jobs`;
+    const { page, search, searchStatus, searchType, sort } = state;
+    let url = `/jobs?page=${page}&status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
+    if (search) {
+      url = url + `&search=${search}`;
+    }
     dispatch({ type: GET_JOBS_BEGIN });
     try {
       const { data } = await authFetch(url);
@@ -234,7 +243,12 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   };
-
+  const clearFilters = () => {
+    dispatch({ type: CLEAR_FILTERS });
+  };
+  const changePage = (page) => {
+    dispatch({ type: CHANGE_PAGE, payload: { page } });
+  };
   const setEditJob = (id) => {
     dispatch({ type: SET_EDIT_JOB, payload: { id } });
   };
@@ -292,6 +306,8 @@ const AppProvider = ({ children }) => {
         clearValues,
         createJob,
         getJobs,
+        clearFilters,
+        changePage,
         setEditJob,
         deleteJob,
         editJob,

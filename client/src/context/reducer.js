@@ -23,6 +23,8 @@ import {
   EDIT_JOB_BEGIN,
   EDIT_JOB_SUCCESS,
   EDIT_JOB_ERROR,
+  CLEAR_FILTERS,
+  CHANGE_PAGE,
 } from "./action";
 import { initialState } from "./appContext";
 
@@ -43,7 +45,7 @@ const reducer = (state, action) => {
       alertText: "",
     };
   }
- 
+
   if (action.type === SETUP_USER_BEGIN) {
     return { ...state, isLoading: true };
   }
@@ -114,7 +116,8 @@ const reducer = (state, action) => {
   if (action.type === HANDLE_CHANGE) {
     return {
       ...state,
-      [action?.payload?.name]: action?.payload?.value,
+      page: 1,
+      [action.payload.name]: action.payload.value,
     };
   }
 
@@ -166,6 +169,18 @@ const reducer = (state, action) => {
       numOfPages: action?.payload?.numOfPages,
     };
   }
+  if (action.type === CLEAR_FILTERS) {
+    return {
+      ...state,
+      search: "",
+      searchStatus: "all",
+      searchType: "all",
+      sort: "latest",
+    };
+  }
+  if (action.type === CHANGE_PAGE) {
+    return { ...state, page: action.payload.page };
+  }
   if (action.type === SET_EDIT_JOB) {
     const job = state.jobs.find((job) => job._id === action.payload.id);
     const { _id, position, company, jobLocation, jobType, status } = job;
@@ -180,40 +195,40 @@ const reducer = (state, action) => {
       status,
     };
   }
-  
-if (action.type === EDIT_JOB_BEGIN) {
-  return { ...state, isLoading: true };
-}
-if (action.type === EDIT_JOB_SUCCESS) {
-  return {
-    ...state,
-    isLoading: false,
-    showAlert: true,
-    alertType: 'success',
-    alertText: 'Job Updated!',
-  };
-}
-if (action.type === EDIT_JOB_ERROR) {
-  return {
-    ...state,
-    isLoading: false,
-    showAlert: true,
-    alertType: 'danger',
-    alertText: action.payload.msg,
-  };
-}
-if (action.type === DELETE_JOB_BEGIN) {
-  return { ...state, isLoading: true };
-}
-if (action.type === DELETE_JOB_ERROR) {
-  return {
-    ...state,
-    isLoading: false,
-    showAlert: true,
-    alertType: 'danger',
-    alertText: action.payload.msg,
-  };
-}
+
+  if (action.type === EDIT_JOB_BEGIN) {
+    return { ...state, isLoading: true };
+  }
+  if (action.type === EDIT_JOB_SUCCESS) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "success",
+      alertText: "Job Updated!",
+    };
+  }
+  if (action.type === EDIT_JOB_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "danger",
+      alertText: action.payload.msg,
+    };
+  }
+  if (action.type === DELETE_JOB_BEGIN) {
+    return { ...state, isLoading: true };
+  }
+  if (action.type === DELETE_JOB_ERROR) {
+    return {
+      ...state,
+      isLoading: false,
+      showAlert: true,
+      alertType: "danger",
+      alertText: action.payload.msg,
+    };
+  }
   throw new Error(`no such action : ${action?.type}`);
 };
 

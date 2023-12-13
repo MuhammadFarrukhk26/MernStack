@@ -1,14 +1,22 @@
-import React from 'react'
-import { useAppContext } from '../context/appContext'
-import { Navigate } from 'react-router-dom'
+import React from "react";
+import { useAppContext } from "../context/appContext";
+import { Navigate } from "react-router-dom";
+import Loading from "../components/Loading";
 
-const ProtectedRoute = ({children}) => {
-    const {user} = useAppContext()
-    if(!user) {
-        return <Navigate to="/landing"/>
-    }
-  
-    return children
-}
+const ProtectedRoute = ({ children }) => {
+  const { user, userLoading } = useAppContext();
+  const user2 = JSON.parse(localStorage.getItem("user"));
 
-export default ProtectedRoute
+  if (userLoading) return <Loading />;
+
+  if (!user2) {
+    // console.log(user2);
+    // debugger;
+
+    return <Navigate to="/landing" />;
+  }
+
+  return children;
+};
+
+export default ProtectedRoute;
